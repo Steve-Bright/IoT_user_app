@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "227427759096",
+    "firebase_url": "https://iotweb-c6665-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iotweb-c6665",
+    "storage_bucket": "iotweb-c6665.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227427759096:android:9f84f9121f7c81876f9c0d",
+        "android_client_info": {
+          "package_name": "com.example.iot_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWkpnas5geggGLSYrHkHtsW_4bRtOS6VM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
