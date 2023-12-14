@@ -10,6 +10,10 @@ class SignInController{
         email: _emailController.text.trim(),
         password: _passwordController.text.trim()
     );
+    if (FirebaseAuth.instance.currentUser != null){
+      print("user id: ${FirebaseAuth.instance.currentUser?.uid}");
+    }
+
   }
 
   void dispose() {

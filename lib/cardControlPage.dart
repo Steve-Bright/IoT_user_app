@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CardHome extends StatefulWidget {
+import 'package:iot_android/signInController.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
+class CardHome extends StatefulWidget {
   bool activate = true;
   String? text, description, buttonText;
 
@@ -11,8 +14,13 @@ class CardHome extends StatefulWidget {
 
 class _CardHomeState extends State<CardHome> {
 
+  DatabaseReference ref = FirebaseDatabase.instance.ref("cardInfo");
+
+
   @override
   Widget build(BuildContext context) {
+
+    findtheUser(FirebaseAuth.instance.currentUser?.uid);
 
     if(widget.activate == true){
       widget.text = "active";
@@ -52,7 +60,12 @@ class _CardHomeState extends State<CardHome> {
                                     Text("2nd Year", style: TextStyle(color: Colors.white)),
                                   ]
                               ),
-                              Icon(Icons.account_circle, color: Colors.white, size: 45)
+                              IconButton(
+                                  icon: Icon(Icons.account_circle, color: Colors.white, size: 45),
+                                onPressed: (){
+                                  _showAlertDialog(context);
+                                }
+                              )
                             ]
                         )
                       ]
@@ -96,5 +109,52 @@ class _CardHomeState extends State<CardHome> {
       ),
     );
   }
+
+  void _showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Log Out?'),
+          // content: Text('This is a sample alert message.'),
+          actions: [
+            Container(
+              color: Colors.red,
+              child: TextButton(
+                child: Text('Log Out', style: TextStyle(color: Colors.white)),
+                onPressed: (){
+                  SignOutController signOut = new SignOutController();
+                  signOut.signOut();
+                  Navigator.pop(context);
+                }
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void findtheUser(String? userID) {
+    DatabaseReference usersRef = FirebaseDatabase.instance.ref().child('cardInfo');
+
+    usersRef.onValue.listen((event) {
+      for (final child in event.snapshot.children) {
+        if(child.child('userInfo').child('userID').value == userID){
+          Map<dynamic, dynamic> userCardInfo= child.value as Map<dynamic, dynamic>;
+          print(userCardInfo);
+          // return child.value;
+        }
+        // print(child.child('userInfo').child('userID').value);
+      }
+    });
+  }
+
 }
 
