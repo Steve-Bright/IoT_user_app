@@ -18,7 +18,7 @@ void main() async{
     debugShowCheckedModeBanner: false,
     home: const MainPage(),
     routes: {
-      'home': (context) => CardHome(),
+      // 'home': (context) => CardHome(),
       'login': (context) => MyLogin(),
     },
   ));
