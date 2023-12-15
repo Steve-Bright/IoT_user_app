@@ -18,9 +18,7 @@ class CardHome extends StatefulWidget {
 class _CardHomeState extends State<CardHome> {
 
   final dbr = FirebaseDatabase.instance.ref();
-  bool? activated, doorLocked;
-  // DatabaseReference ref = FirebaseDatabase.instance.ref("cardInfo");
-
+  bool? activated;
 
   @override
   Widget build(BuildContext context) {
